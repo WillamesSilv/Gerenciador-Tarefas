@@ -20,7 +20,8 @@
 }
 
 .remove-task-button,
-.see-task-details-button {
+.see-task-details-button,
+.taskCompleted {
   background-color: #444;
   color: chartreuse;
   border: none;

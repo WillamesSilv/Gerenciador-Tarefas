@@ -8,19 +8,41 @@ import Header from './components/Header'
 import TaskDetails from './components/TaskDetails'
 
 import './App.css'
-import axios from 'axios'
+//import axios from 'axios'
 
 const App = () => {
   const [tasks, setTasks] = useState([])
-
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchTask = async () => {
       const { data } = await axios.get(
         'https://jsonplaceholder.cypress.io/todos?_limit=5'
       )
+      const newData = { ...data, description: 'Descrição' }
+      console.log(newData)
       setTasks(data)
     }
     fetchTask()
+  }, [])*/
+
+  useEffect(() => {
+    const data = [
+      {
+        title: 'Reunião',
+        id: 1,
+        completed: true,
+        description:
+          'Reunião do trabalho as 09:00h, sobre a produtividade operacional.'
+      },
+      {
+        title: 'Estudar Programação',
+        id: 2,
+        completed: false,
+        description:
+          'Estudar React, HTML, CSS e JavaScript á partir das 21:00h.'
+      }
+    ]
+
+    setTasks(data)
   }, [])
 
   const handleTaskClick = taskId => {
@@ -31,13 +53,14 @@ const App = () => {
     setTasks(newTasks)
   }
 
-  const handleTaskAddition = taskTitle => {
+  const handleTaskAddition = (taskTitle, taskDescription) => {
     const newTasks = [
       ...tasks,
       {
         title: taskTitle,
         id: uuidv4(),
-        completed: false
+        completed: false,
+        description: taskDescription
       }
     ]
     setTasks(newTasks)
@@ -58,6 +81,7 @@ const App = () => {
           render={() => (
             <>
               <AddTask handleTaskAddition={handleTaskAddition} />
+              <p style={{ textAlign: 'center' }}>Painel de Tarefas</p>
               <Tasks
                 tasks={tasks}
                 handleTaskClick={handleTaskClick}
